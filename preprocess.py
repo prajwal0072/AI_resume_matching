@@ -3,25 +3,24 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-# Download once (safe to keep)
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('omw-1.4')
+# Download required resources safely
+@nltk.download('stopwords', quiet=True)
+@nltk.download('wordnet', quiet=True)
+@nltk.download('omw-1.4', quiet=True)
+def download_nltk_resources():
+    pass
+
+download_nltk_resources()
 
 lemmatizer = WordNetLemmatizer()
 stop_words = set(stopwords.words('english'))
 
 def preprocess_text(text):
-    # Lowercase
     text = text.lower()
-
-    # Remove special characters & numbers
     text = re.sub(r"[^a-zA-Z ]", " ", text)
 
-    # Tokenize
     words = text.split()
 
-    # Lemmatize + remove stopwords
     tokens = [
         lemmatizer.lemmatize(word)
         for word in words
