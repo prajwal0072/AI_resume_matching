@@ -3,17 +3,16 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-# Download required resources safely
-@nltk.download('stopwords', quiet=True)
-@nltk.download('wordnet', quiet=True)
-@nltk.download('omw-1.4', quiet=True)
-def download_nltk_resources():
-    pass
+# Safe NLTK downloads for Streamlit Cloud
+def download_nltk():
+    nltk.download("stopwords", quiet=True)
+    nltk.download("wordnet", quiet=True)
+    nltk.download("omw-1.4", quiet=True)
 
-download_nltk_resources()
+download_nltk()
 
 lemmatizer = WordNetLemmatizer()
-stop_words = set(stopwords.words('english'))
+stop_words = set(stopwords.words("english"))
 
 def preprocess_text(text):
     text = text.lower()
@@ -28,4 +27,6 @@ def preprocess_text(text):
     ]
 
     return tokens
+
+
 
